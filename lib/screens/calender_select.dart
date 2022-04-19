@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import 'confirmBooking.dart';
+
 void main() => runApp(DateRanges());
 
 class DateRanges extends StatefulWidget {
@@ -82,12 +84,12 @@ class SelectedDateRange extends State<DateRanges> {
                           height: 52.34,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   (MaterialPageRoute(
-                              //     builder: (context) =>  ViewProf(),
-                              //   )),
-                              // );
+                              Navigator.push(
+                                context,
+                                (MaterialPageRoute(
+                                  builder: (context) =>  ConfirmBooking(),
+                                )),
+                              );
                             },
                             child: const Text(
                               'Confirm',
