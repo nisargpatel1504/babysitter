@@ -5,6 +5,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 
+
+
+int _selectedIndex = 0;
+ const TextStyle optionStyle =
+TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+List<Widget> _widgetOptions = <Widget>[
+  Home(),
+  Text("Hello"),
+];
+
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -14,21 +26,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String photourl = '';
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  
-    List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    Text("Hello"),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,126 +47,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ]),
       backgroundColor: const Color(0xff693EFF),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(70)),
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 30.0, left: 30.0, bottom: 10),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Baby Sitters',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color(0xff6043F5),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                FutureBuilder<QuerySnapshot>(
-                  future: FirebaseFirestore.instance
-                      .collection("users")
-                      .where('userType', isEqualTo: 'sitter')
-                      .get(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text("Error: ${snapshot.error}"),
-                      );
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Column(
-                            children: snapshot.data!.docs.map((document) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width - 50,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xffFFEBFC),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        document['name'],
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          color: Color(0xff6043F5),
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.star),
-                                          Text(
-                                            document['rating'],
-                                            style: const TextStyle(
-                                              fontSize: 10,
-                                              color: Color(0xff6043F5),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            (MaterialPageRoute(
-                                              builder: (context) => ViewProf(
-                                                nameofSitter: 'Nikita Johnes',
-                                                parentKey: 'DDDFf2',
-                                                uniquekey: 'eewee3',
-                                              ),
-                                            )),
-                                          );
-                                        },
-                                        child: const Text('View Profile'),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset('assets/niki.png'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }).toList()),
-                      );
-                    }
-
-                    // Loading State
-                    return Center(
-                      // ignore: sized_box_for_whitespace
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        child: const CircularProgressIndicator(
-                          strokeWidth: 2.0,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
 
@@ -251,6 +135,139 @@ class SingleBabySitter extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(70)),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 30.0, left: 30.0, bottom: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Baby Sitters',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xff6043F5),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              FutureBuilder<QuerySnapshot>(
+                future: FirebaseFirestore.instance
+                    .collection("users")
+                    .where('userType', isEqualTo: 'sitter')
+                    .get(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error: ${snapshot.error}"),
+                    );
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Column(
+                          children: snapshot.data!.docs.map((document) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 50,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xffFFEBFC),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          document['name'],
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Color(0xff6043F5),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(Icons.star),
+                                            Text(
+                                              document['rating'],
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                color: Color(0xff6043F5),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              (MaterialPageRoute(
+                                                builder: (context) => ViewProf(
+                                                  nameofSitter: 'Nikita Johnes',
+                                                  parentKey: 'DDDFf2',
+                                                  uniquekey: 'eewee3',
+                                                ),
+                                              )),
+                                            );
+                                          },
+                                          child: const Text('View Profile'),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset('assets/niki.png'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList()),
+                    );
+                  }
+
+                  // Loading State
+                  return Center(
+                    // ignore: sized_box_for_whitespace
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child: const CircularProgressIndicator(
+                        strokeWidth: 2.0,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
