@@ -6,6 +6,7 @@ class ConfirmBooking extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Color(0xff6043F5)),
       home: Scaffold(
         appBar: null,
