@@ -8,6 +8,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: buildAppBar(context),
       body: Container(
         margin: new EdgeInsets.only(top: 10,bottom: 10),

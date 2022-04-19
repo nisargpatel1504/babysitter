@@ -12,16 +12,16 @@ class _babysitterProfileState extends State<babysitterProfile> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-
+        resizeToAvoidBottomInset : false,
         body: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           child: Container(
 
             child: Container(
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(top: 60, right: 150),
+                    padding: EdgeInsets.only(right: 170),
                     child: Text("Profile",
                       textAlign: TextAlign.left,
 
@@ -36,7 +36,7 @@ class _babysitterProfileState extends State<babysitterProfile> {
                   Row(
                     children:[
                       Padding(
-                        padding: EdgeInsets.only(left: 20, top: 60),
+                        padding: EdgeInsets.only(left: 20, top: 20),
                         child: Container(
                           height: 150,
                           width: 150,
