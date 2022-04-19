@@ -12,15 +12,16 @@ class _babysitterProfileState extends State<babysitterProfile> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+
         body: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: EdgeInsets.only(top: 10),
+          child: Container(
+
             child: Container(
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 20, top: 60),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 60, right: 150),
                     child: Text("Profile",
                       textAlign: TextAlign.left,
 
@@ -37,8 +38,8 @@ class _babysitterProfileState extends State<babysitterProfile> {
                       Padding(
                         padding: EdgeInsets.only(left: 20, top: 60),
                         child: Container(
-                          height: 200,
-                          width: 200,
+                          height: 150,
+                          width: 150,
 
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -57,16 +58,78 @@ class _babysitterProfileState extends State<babysitterProfile> {
                         ),
                       ),
 
+                      SizedBox(
+                        width: 30,
+                      ),
+
+                      Column(
+                        children: const [
+                          Text("Nikita Johns", style: TextStyle(
+                              color: Color(0xff6043F5),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                          ),),
+                          Text("Montreal, Quebec Canada")
+                        ]
+                      )
+
                     ]
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right:105),
+                        child: Text("DESCRIPTION",
+                          textAlign:TextAlign.left,
+                          style: TextStyle(
+                            color: Color(0xff6043F5),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold
+                        ),
+                        ),
+                      ),
+
+                      Container(
+                        width: 300,
+                        height: 250,
+                        child:  Card(
+                            color: Colors.white10,
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextField(
+                                maxLines: 8,
+                                decoration: InputDecoration.collapsed(hintText: "Write Something here..."),
+                              ),
+                            )
+                        )
+                      ),
+                      ElevatedButton(
+
+                        style: ButtonStyle(
+                          
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(Color(0xff6043F5))
+
+                        ),
+                        onPressed: () { },
+                        child: Text('Save'),
+                      )
+
+                    ],
                   )
 
-                ],
+                ]
+              )
               ),
 
             ),
           ),
         ),
-      ),
-    );
+      );
+
   }
 }
