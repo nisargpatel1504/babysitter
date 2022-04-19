@@ -41,7 +41,7 @@ class CartScreen extends StatelessWidget {
 class MyStatelessWidget extends StatelessWidget {
   String txt1;
   String txt2;
-   MyStatelessWidget(this.txt1,this.txt2)
+   MyStatelessWidget(this.txt1,this.txt2);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class MyStatelessWidget extends StatelessWidget {
         children: <Widget>[
           const ListTile(
             leading: Icon(Icons.album),
-            title: Text(this.txt1),
+            title: null,
             // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
           ),
           Row(
