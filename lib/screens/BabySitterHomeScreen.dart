@@ -1,3 +1,4 @@
+import 'package:babycare/screens/notification.dart';
 import 'package:babycare/screens/sitterProfile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,9 @@ class _SitterHomeState extends State<SitterHome> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static  List<Widget> _widgetOptions = <Widget>[
+    SitterNotification(),
     babysitterProfile(),
-    babysitterProfile(),
-
-
-  ];
+];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,7 +29,7 @@ class _SitterHomeState extends State<SitterHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(''),
+          title: const Text('Baby Sitter'),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
