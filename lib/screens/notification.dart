@@ -1,15 +1,29 @@
+import 'package:babycare/screens/notification_cart.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Notification extends StatefulWidget {
-  const Notification({Key? key}) : super(key: key);
+
+
+class SitterNotification extends StatefulWidget {
+
 
   @override
-  State<Notification> createState() => _NotificationState();
+  State<SitterNotification> createState() => _SitterNotificationState();
 }
 
-class _NotificationState extends State<Notification> {
+class _SitterNotificationState extends State<SitterNotification> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+
+      body: Container(
+        child: Column(
+          children: [
+            SitterCart(),
+            SitterCart(),
+          ],
+        ),
+      ),
+    );
   }
 }
