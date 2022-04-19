@@ -32,16 +32,32 @@ class _babysitterProfileState extends State<babysitterProfile> {
                     ),
                   ),
 
-                  Padding(
-                    padding: EdgeInsets.only(left: 20, top: 60),
-                    child: Container(
-                      height: 200,
-                      width: 200,
-                      color: Colors.pink,
-                      decoration: BorderRadius,
-                      child: Image.asset("assets/niki.png", fit: BoxFit.fill,),
+                  Row(
+                    children:[
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, top: 60),
+                        child: Container(
+                          height: 200,
+                          width: 200,
 
-                    ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 0.0,
+
+                            ),
+                              image: const DecorationImage(
+                                image: AssetImage("assets/niki.png"),
+                                fit: BoxFit.fill,
+                              ),
+                              borderRadius: BorderRadius.circular(30)
+                          ),
+
+                          child: null,
+
+                        ),
+                      ),
+
+                    ]
                   )
 
                 ],
