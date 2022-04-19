@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 GlobalKey<FormState> formkey = GlobalKey<FormState>();
@@ -81,10 +80,7 @@ class _UserState extends State<User> {
                                   border: OutlineInputBorder(),
                                   labelText: "First Name",
                                 ),
-                                validator: MultiValidator([
-                                  RequiredValidator(
-                                      errorText: "Name must be required"),
-                                ]),
+
                               ),
                               SizedBox(height: 10.0),
                               TextFormField(
@@ -92,11 +88,7 @@ class _UserState extends State<User> {
                                   border: OutlineInputBorder(),
                                   labelText: "Email",
                                 ),
-                                validator: MultiValidator([
-                                  RequiredValidator(
-                                      errorText: "Email must be required"),
-                                  EmailValidator(errorText: "Not a valid email"),
-                                ]),
+
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
@@ -112,9 +104,6 @@ class _UserState extends State<User> {
                                   border: OutlineInputBorder(),
                                   labelText: "Allergie?? Yes or no",
                                 ),
-                                validator: MultiValidator([
-                                  RequiredValidator(errorText: "must be required"),
-                                ]),
                               ),
                             ],
                           ),
