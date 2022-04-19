@@ -1,4 +1,5 @@
 import 'package:babycare/screens/HomePage.dart';
+import 'package:babycare/screens/sitterProfile.dart';
 import 'package:babycare/screens/splashscreen2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,12 +28,23 @@ class LoginPageState extends State<LoginPage> {
       final authResult = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emaily, password: passwordy);
       if (authResult.user != null) {
-        Navigator.push(
-          context,
-          (MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          )),
-        );
+        if (widget.userType == 'sitter'){
+          Navigator.push(
+            context,
+              (MaterialPageRoute(
+                builder: (context) => babysitterProfile()
+              ))
+          );
+        }else{
+          Navigator.push(
+            context,
+            (MaterialPageRoute(
+
+              builder: (context) => const HomePage(),
+            )),
+          );
+        }
+
       }
     } on FirebaseAuthException catch (e) {
       // ignore: avoid_print

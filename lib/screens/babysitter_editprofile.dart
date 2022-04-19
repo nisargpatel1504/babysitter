@@ -1,164 +1,153 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class babysitterProfile extends StatefulWidget{
-  @override
-  State<babysitterProfile> createState() => _babysitterProfileState();
-}
-
-class _babysitterProfileState extends State<babysitterProfile> {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      backgroundColor: Colors.white,
-
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(180),
-        child: appBar(),
-      ),
-      body: Body(context),
-    );
+GlobalKey<FormState> formkey = GlobalKey<FormState>();
+const kbuttonLabel = TextStyle(
+  color: Colors.white,
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+void validate() {
+  if (formkey.currentState!.validate()) {
+    print("validated");
+  } else {
+    print("Not validated");
   }
 }
-Widget appBar() {
 
-  return AppBar(
-    elevation: 0,
-    backgroundColor: Colors.white,
-    flexibleSpace: SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 75,
-            height: 75,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                border: Border.all(color: Colors.black)
-            ),
-            child: Center(
-              child: GestureDetector (
-                onTap: () {},
-                child: const CircleAvatar (
-                  backgroundImage: AssetImage("assets/user.jpg"),
-                  backgroundColor: Colors.transparent,
-                  radius: 40.0,
+String? validatePassword(value) {
+  if (value.isEmpty) {
+    return "Password is required";
+  } else if (value.length < 6) {
+    return "Password shoulb be atleast 6 charcaters";
+  } else if (value.length > 15) {
+    return "Password shoulb not be more than 15 charcaters";
+  } else {
+    return null;
+  }
+}
+
+class User extends StatefulWidget {
+  const User({Key? key}) : super(key: key);
+
+  @override
+  _UserState createState() => _UserState();
+}
+
+class _UserState extends State<User> {
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.red,
+          elevation: 0,
+          title: Text(
+            "User Profile",
+            style: GoogleFonts.ubuntu(),
+          ),
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
+                  child: SizedBox(
+                    width: size.width,
+                    height: 250.0,
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Image.network(
+                          "https://cdn-icons-png.flaticon.com/512/64/64572.png"),
+                    ),
+                  ),
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(20.0, 50.0, 20, 0),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Form(
+                          key: formkey,
+                          autovalidateMode: AutovalidateMode.always,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "First Name",
+                                ),
+                                validator: MultiValidator([
+                                  RequiredValidator(
+                                      errorText: "Name must be required"),
+                                ]),
+                              ),
+                              SizedBox(height: 10.0),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Email",
+                                ),
+                                validator: MultiValidator([
+                                  RequiredValidator(
+                                      errorText: "Email must be required"),
+                                  EmailValidator(errorText: "Not a valid email"),
+                                ]),
+                              ),
+                              SizedBox(height: 20.0),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Password",
+                                ),
+                                validator: validatePassword,
+                              ),
+                              SizedBox(height: 20.0),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Allergie?? Yes or no",
+                                ),
+                                validator: MultiValidator([
+                                  RequiredValidator(errorText: "must be required"),
+                                ]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 100.0),
+                      MaterialButton(
+                        height: 60.0,
+                        minWidth: double.infinity,
+                        color: Colors.deepOrange,
+                        onPressed: () {
+                          if (formkey.currentState!.validate()) {
+                            print("validated");
+                            Navigator.pushNamed(context, '/home');
+                          } else {
+                            print("Not validated");
+                          }
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Text(
+                          "Update",
+                          style: kbuttonLabel,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 10,),
-          Text("sdjhg",
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black,),),
-          const SizedBox(height: 10,),
-          Text("daslfh", style: const TextStyle(fontSize: 16,color: Colors.black,),),
-        ],
-      ),
-    ),
-    actions: <Widget>[
-      FlatButton.icon(
-          onPressed: ()async{
-            await _auth.logOut();
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>loginMain()));
-            await _auth.signOut();
-
-            //  Navigator.push(context, MaterialPageRoute(builder: (context) => loginMain()));
-            Fluttertoast.showToast(
-              msg: "Logout Successfully",
-              toastLength: Toast.LENGTH_LONG,
-              //gravity: ToastGravity.CENTER
-            );
-
-          },
-          icon: Icon(Icons.person),
-          label: Text("Logout")
-      )
-    ],
-  );
-}
-
-Widget Body(BuildContext context) {
-
-  var size = MediaQuery.of(context).size;
-  return SingleChildScrollView(
-
-    child: Column(
-      children: [
-        const SizedBox(height: 30,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              children: const [
-                Text("Posts",
-                    style: TextStyle(fontSize: 15, color: Colors.black)
-                ),
-                SizedBox(height: 8,),
-                Text("8", style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Column(
-              children: const [
-                Text("Followers",
-                    style: TextStyle(fontSize: 15, color: Colors.black)
-                ),
-                SizedBox(height: 8,),
-                Text("565", style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Column(
-              children: const [
-                Text("Following",
-                    style: TextStyle(fontSize: 15, color: Colors.black)
-                ),
-                SizedBox(height: 8,),
-                Text("15", style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(height: 30,
-        ),
-
-        Wrap(
-          spacing: 10,
-          runSpacing: 5,
-          children: List.generate(imgList.length, (index){
-            return Container(
-              width: (size.width-60)/2,
-              height: (size.width-60)/2,
-              decoration: BoxDecoration(image: DecorationImage(
-                  image:NetworkImage(),
-                  fit: BoxFit.cover)),
-              child: const Center(
-                child: Icon(Icons.play_circle_outline,size: 40,color: Colors.white),
-
-              ),
-            );
-          }),
         )
-      ],
-    ),
-  );
-}
-
-
-
-
-basename(String path) {
-  return path;
-}
-
-
-
-
+    );
+  }
 }
