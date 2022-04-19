@@ -1,3 +1,5 @@
+
+import 'package:babycare/screens/sitterProfile.dart';
 import 'package:babycare/screens/viewProfil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -12,7 +14,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String photourl = '';
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   
+    List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    Text("Hello"),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,6 +163,25 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Booking',
+            backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Profile',
+            backgroundColor: Colors.purple,
+          ),
+
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }

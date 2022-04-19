@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
   static String routeName = "/cart";
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
       body: Container(
-
         margin: new EdgeInsets.only(top: 10,bottom: 10),
         child:Column(
           children: [
-            MyStatelessWidget(),
-            MyStatelessWidget(),
+            MyStatelessWidget("Bath","",),
+            MyStatelessWidget("Baby Cloth laundry",""),
             TextButton(style: TextButton.styleFrom(
               primary: Colors.blueAccent,
               padding: const EdgeInsets.all(16.0),
@@ -38,7 +39,9 @@ class CartScreen extends StatelessWidget {
   }
 }
 class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key? key}) : super(key: key);
+  String txt1;
+  String txt2;
+   MyStatelessWidget(this.txt1,this.txt2)
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +52,8 @@ class MyStatelessWidget extends StatelessWidget {
         children: <Widget>[
           const ListTile(
             leading: Icon(Icons.album),
-            title: Text('The Enchanted Nightingale'),
-            subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+            title: Text(this.txt1),
+            // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

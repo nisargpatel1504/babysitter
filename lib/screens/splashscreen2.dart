@@ -103,6 +103,7 @@ class _Splashscreen1State extends State<Splashscreen1> {
           ),
         ),
       ),
+
     );
   }
 }
