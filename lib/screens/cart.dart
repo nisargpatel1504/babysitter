@@ -1,3 +1,4 @@
+import 'package:babycare/screens/confirmBooking.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
@@ -12,13 +13,15 @@ class CartScreen extends StatelessWidget {
         margin: new EdgeInsets.only(top: 10,bottom: 10),
         child:Column(
           children: [
-            MyStatelessWidget("Bath","",),
-            MyStatelessWidget("Baby Cloth laundry",""),
+            MyStatelessWidget(txt1: "Baby Shower",txt2: "20",),
+            MyStatelessWidget(txt1:"Baby Cloth laundry",txt2: "15"),
             TextButton(style: TextButton.styleFrom(
               primary: Colors.blueAccent,
               padding: const EdgeInsets.all(16.0),
               textStyle: const TextStyle(fontSize: 20),
-            ),onPressed: (){}, child: Text("Order"))
+            ),onPressed: (){
+              Navigator.push(context,MaterialPageRoute(builder: (context) =>ConfirmBooking(), ),);
+            }, child: Text("Order"))
           ],
         ),
       ),
@@ -39,9 +42,9 @@ class CartScreen extends StatelessWidget {
   }
 }
 class MyStatelessWidget extends StatelessWidget {
-  String txt1;
-  String txt2;
-   MyStatelessWidget(this.txt1,this.txt2);
+  final String txt1;
+  final String txt2;
+   MyStatelessWidget({Key? key ,required this.txt1,required this.txt2});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class MyStatelessWidget extends StatelessWidget {
         children: <Widget>[
           const ListTile(
             leading: Icon(Icons.album),
-            title: null,
+            title: Text(""),
             // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
           ),
           Row(

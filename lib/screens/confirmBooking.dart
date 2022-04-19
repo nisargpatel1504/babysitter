@@ -1,11 +1,27 @@
+
+
+import 'package:babycare/screens/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
+class ConfirmBooking extends StatefulWidget{
+  @override
+  State<ConfirmBooking> createState() => _ConfirmBookingState();
+}
 
-class ConfirmBooking extends StatelessWidget{
+class _ConfirmBookingState extends State<ConfirmBooking> {
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+        Duration(seconds: 3),
+            () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (BuildContext context) => HomePage())));
+  }
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
+ return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Color(0xff6043F5)),
       home: Scaffold(
@@ -36,5 +52,4 @@ class ConfirmBooking extends StatelessWidget{
 
     );
   }
-
 }
