@@ -2,7 +2,9 @@
 
 import 'package:babycare/screens/calendary.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import 'calender_select.dart';
 // import '../Dates/dates.dart';
 // import '../screens ui/Availability.dart';
 
@@ -23,7 +25,7 @@ class ViewProf extends StatefulWidget {
   @override
   State<ViewProf> createState() => _ViewProfState();
 }
-
+List<String> views = <String>['Month', 'Year', 'Decade', 'Century'];
 class _ViewProfState extends State<ViewProf> {
   late DateTime date;
 
@@ -195,7 +197,7 @@ class _ViewProfState extends State<ViewProf> {
                           Navigator.push(
                             context,
                             (MaterialPageRoute(
-                              builder: (context) =>  Home(),
+                              builder: (context) =>  DateRanges(),
                             )),
                           );
                         },
