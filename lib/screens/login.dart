@@ -1,3 +1,4 @@
+import 'package:babycare/screens/BabySitterHomeScreen.dart';
 import 'package:babycare/screens/HomePage.dart';
 import 'package:babycare/screens/sitterProfile.dart';
 import 'package:babycare/screens/splashscreen2.dart';
@@ -32,7 +33,7 @@ class LoginPageState extends State<LoginPage> {
           Navigator.push(
             context,
               (MaterialPageRoute(
-                builder: (context) => babysitterProfile()
+                builder: (context) => SitterHome(),
               ))
           );
         }else{
