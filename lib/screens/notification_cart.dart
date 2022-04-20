@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SitterCart extends StatelessWidget {
-  const SitterCart({Key? key, required this.giftItem,}) : super(key: key);
+  const SitterCart({
+    Key? key,
+    required this.giftItem,
+  }) : super(key: key);
   final GiftItem giftItem;
 
   @override
@@ -11,34 +14,40 @@ class SitterCart extends StatelessWidget {
     return Container(
       child: Card(
         child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-         ListTile(
-        leading: Icon(Icons.album),
-    title: Text(giftItem.name.toString()),
-    subtitle: Text(giftItem.email.toString()),
-    ),
-    Row(
-    mainAxisAlignment: MainAxisAlignment.end,
-    children: <Widget>[
-
-      IconButton(onPressed: (){}, icon: Icon(
-        Icons.check_circle,
-        color: Colors.black.withOpacity(0.5),
-        size: 18,
-      ),),
-    IconButton(onPressed: (){}, icon: Icon(
-      Icons.cancel,
-      color: Colors.black.withOpacity(0.5),
-      size: 18,
-    ),),
-
-
-    const SizedBox(width: 8),
-    ],
-    ),
-    ],
-    ),),
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.album),
+              title: Text(giftItem.name.toString()),
+              subtitle: Text(giftItem.email.toString()),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                IconButton(
+                  onPressed: () {
+                    GiftManager().update_data(giftItem.id.toString());
+                  },
+                  icon: Icon(
+                    Icons.check_circle,
+                    color: Colors.black.withOpacity(0.5),
+                    size: 18,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.cancel,
+                    color: Colors.black.withOpacity(0.5),
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
