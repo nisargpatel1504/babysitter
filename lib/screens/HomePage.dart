@@ -1,4 +1,5 @@
 
+import 'package:babycare/screens/parentProfile.dart';
 import 'package:babycare/screens/sitterProfile.dart';
 import 'package:babycare/screens/viewProfil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,7 +14,7 @@ TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
 List<Widget> _widgetOptions = <Widget>[
   Home(),
-  Text("Hello"),
+  ParentProfile(),
 ];
 
 
