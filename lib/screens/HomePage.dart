@@ -3,6 +3,7 @@ import 'package:babycare/screens/parentProfile.dart';
 import 'package:babycare/screens/sitterProfile.dart';
 import 'package:babycare/screens/viewProfil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,14 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           actions: [
             IconButton(
-              onPressed: () async {},
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                print("Logout");
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Logout"),
+                ));
+                Navigator.of(context).pop();
+              },
               icon: const Icon(Icons.logout),
             ),
           ]),

@@ -1,5 +1,6 @@
 import 'package:babycare/screens/notification.dart';
 import 'package:babycare/screens/sitterProfile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,14 @@ class _SitterHomeState extends State<SitterHome> {
           elevation: 0,
           actions: [
             IconButton(
-              onPressed: () async {},
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                print("Logout");
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Logout"),
+                ));
+                Navigator.of(context).pop();
+              },
               icon: const Icon(Icons.logout),
             ),
           ]),

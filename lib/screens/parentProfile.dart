@@ -14,27 +14,25 @@ class ParentProfile extends StatefulWidget {
 class _ParentProfileState extends State<ParentProfile> {
   String? uname ,email,address;
   int? phone;
+
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  fetchUser() async{
+
+  fetchUser() async {
     final firebaseUser = await FirebaseAuth.instance.currentUser!;
-    print(" uid: ${firebaseUser.uid}");
-    if(firebaseUser!=null){
+    if (firebaseUser != null) {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(firebaseUser.uid)
           .get()
-          .then((ds) =>{
-            print(firebaseUser.uid),
-            uname = ds.data()!['name'],
-            email = ds.data()!['email'],
-            address =ds.data()!['address'],
-            phone = ds.data()!['phone']
-
-      }).catchError((e){
+          .then((ds) {
+        uname = ds.data()!["name"];
+      }).catchError((e) {
         print(e);
       });
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +84,18 @@ class _ParentProfileState extends State<ParentProfile> {
               const SizedBox(
                 height: 40,
               ),
+      FutureBuilder(
+        future: fetchUser(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+                  return Text("Loading data");
+                }
+          else {print(uname);
+                  return Text("${uname}");
+                }
+              },
+      ),
+
               TextWidget(name: "Name", color: Colors.grey),
               TextWidget(name: uname.toString(), color: Color(0xff6043F5)),
               SizedBox(
