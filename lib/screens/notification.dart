@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'newNotification.dart';
+
 
 
 class SitterNotification extends StatefulWidget {
@@ -17,55 +19,65 @@ class SitterNotification extends StatefulWidget {
 }
 
 class _SitterNotificationState extends State<SitterNotification> {
+
+  List<GiftItem> giftItems = [];
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetchGiftData();
+
+  }
+
+  fetchGiftData() async {
+    dynamic result = await GiftManager().getGiftItemList();
+    if (result == null) {
+      print("Gift list null");
+    } else {
+      setState(() {
+        giftItems = result;
+        // for(var i = 0; i< giftItems.length; i++){
+        //
+        //   giftItems.add(giftItems[i]);
+        //
+        // }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(widget.email);
+
+
     return Scaffold(
 
       body: Container(
-        child: Column(
+        child: ListView(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           children: [
-            // SitterCart(),
-            // SitterCart(),
-            FutureBuilder<QuerySnapshot>(
-              future: FirebaseFirestore.instance
-                  .collection("booking")
-                  .where('sitterId', isEqualTo: widget.email)
-                  .get(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text("Error: ${snapshot.error}"),
-                  );
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text("Loading");
-                }
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: giftItems.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20.0,
+                  crossAxisSpacing: 20.0,
+                ),
+                itemBuilder: (context, index) => SitterCart(
+              giftItem: giftItems[index],
 
-                if (snapshot.connectionState == ConnectionState.done) {
-
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: SitterCart(name: "Hello",),
-                  );
-                }
-
-                // Loading State
-                return Center(
-                  // ignore: sized_box_for_whitespace
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    child: const CircularProgressIndicator(
-                      strokeWidth: 2.0,
-                    ),
-                  ),
-                );
-              },
-            ),
-
+                ),
+              ),
+            )
           ],
         ),
+
       ),
     );
   }

@@ -1,9 +1,10 @@
+import 'package:babycare/screens/newNotification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SitterCart extends StatelessWidget {
-  const SitterCart({Key? key, required this.name,}) : super(key: key);
-  final String name;
+  const SitterCart({Key? key, required this.giftItem,}) : super(key: key);
+  final GiftItem giftItem;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +15,8 @@ class SitterCart extends StatelessWidget {
         children: <Widget>[
          ListTile(
         leading: Icon(Icons.album),
-    title: Text(name.toString()),
-    subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+    title: Text(giftItem.name.toString()),
+    subtitle: Text(giftItem.email.toString()),
     ),
     Row(
     mainAxisAlignment: MainAxisAlignment.end,
