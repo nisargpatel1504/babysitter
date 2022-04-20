@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.account_circle_outlined),
             label: 'Profile',
             backgroundColor: Colors.purple,
           ),

@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SitterCart extends StatelessWidget {
-  const SitterCart({Key? key}) : super(key: key);
+  const SitterCart({Key? key, required this.name,}) : super(key: key);
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -11,21 +12,14 @@ class SitterCart extends StatelessWidget {
         child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-        const ListTile(
+         ListTile(
         leading: Icon(Icons.album),
-    title: Text('Dhinchak Pooja'),
+    title: Text(name.toString()),
     subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
     ),
     Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: <Widget>[
-
-
-
-    // TextButton(
-    // child: const Text('BUY TICKETS'),
-    // onPressed: () {/* ... */},
-    // ),
 
       IconButton(onPressed: (){}, icon: Icon(
         Icons.check_circle,

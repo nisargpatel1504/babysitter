@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SitterHome extends StatefulWidget {
-  const SitterHome({Key? key}) : super(key: key);
+  const SitterHome({Key? key, required this.email}) : super(key: key);
+  final String email;
 
   @override
   State<SitterHome> createState() => _SitterHomeState();
@@ -12,21 +13,24 @@ class SitterHome extends StatefulWidget {
 
 class _SitterHomeState extends State<SitterHome> {
 
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static  List<Widget> _widgetOptions = <Widget>[
-    SitterNotification(),
-    babysitterProfile(),
-];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
+    int _selectedIndex = 0;
+     const TextStyle optionStyle =
+    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      List<Widget> _widgetOptions = <Widget>[
+      SitterNotification(email: widget.email,),
+      babysitterProfile(),
+    ];
+
+    void _onItemTapped(int index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
           title: const Text('Baby Sitter'),

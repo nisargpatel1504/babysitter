@@ -1,10 +1,14 @@
 import 'package:babycare/screens/confirmBooking.dart';
 import 'package:flutter/material.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   static String routeName = "/cart";
 
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
 
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,15 +20,18 @@ class CartScreen extends StatelessWidget {
           children: [
             MyStatelessWidget(txt1: "Baby Shower",txt2: "20",),
             MyStatelessWidget(txt1:"Baby Cloth laundry",txt2: "15"),
-            TextButton(style: TextButton.styleFrom(
-              primary: Colors.blueAccent,
-              padding: const EdgeInsets.all(16.0),
-              textStyle: const TextStyle(fontSize: 20),
-            ),onPressed: (){
-              Navigator.push(context,MaterialPageRoute(builder: (context) =>ConfirmBooking(), ),);
-            }, child: Text("Order"))
+
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        child:  TextButton(style: TextButton.styleFrom(
+          primary: Colors.blueAccent,
+          padding: const EdgeInsets.all(16.0),
+          textStyle: const TextStyle(fontSize: 20),
+        ),onPressed: (){
+          Navigator.push(context,MaterialPageRoute(builder: (context) =>ConfirmBooking(), ),);
+        }, child: Text("Order"),),
       ),
     );
   }
@@ -54,25 +61,15 @@ class MyStatelessWidget extends StatelessWidget {
 
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const ListTile(
+           ListTile(
             leading: Icon(Icons.album),
-            title: Text(""),
+            title: Text(txt1),
             // subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: Colors.pink,
-                size: 24.0,
-                semanticLabel: 'Text to announce in accessibility modes',
-              ),
-              Icon(
-                Icons.audiotrack,
-                color: Colors.green,
-                size: 30.0,
-              ),
+             Text("\$${txt2}"),
               const SizedBox(width: 8),
             ],
           ),

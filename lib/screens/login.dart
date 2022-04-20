@@ -29,11 +29,12 @@ class LoginPageState extends State<LoginPage> {
       final authResult = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emaily, password: passwordy);
       if (authResult.user != null) {
+
         if (widget.userType == 'sitter'){
           Navigator.push(
             context,
               (MaterialPageRoute(
-                builder: (context) => SitterHome(),
+                builder: (context) => SitterHome(email: emaily,),
               ))
           );
         }else{

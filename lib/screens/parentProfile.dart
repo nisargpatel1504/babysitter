@@ -1,5 +1,7 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ParentProfile extends StatefulWidget {
@@ -10,6 +12,30 @@ class ParentProfile extends StatefulWidget {
 }
 
 class _ParentProfileState extends State<ParentProfile> {
+  String? uname ,email,address;
+  int? phone;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  fetchUser() async{
+    final firebaseUser = await FirebaseAuth.instance.currentUser!;
+    print(" uid: ${firebaseUser.uid}");
+    if(firebaseUser!=null){
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          .then((ds) =>{
+            print(firebaseUser.uid),
+            uname = ds.data()!['name'],
+            email = ds.data()!['email'],
+            address =ds.data()!['address'],
+            phone = ds.data()!['phone']
+
+      }).catchError((e){
+        print(e);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +46,9 @@ class _ParentProfileState extends State<ParentProfile> {
 
         child: Column(
             children:  [
+
+
+
               const Padding(
                 padding: EdgeInsets.only(top: 20, right: 250),
                 child: Text("Profile",
@@ -58,22 +87,22 @@ class _ParentProfileState extends State<ParentProfile> {
                 height: 40,
               ),
               TextWidget(name: "Name", color: Colors.grey),
-              TextWidget(name: "Smith Johns", color: Color(0xff6043F5)),
+              TextWidget(name: uname.toString(), color: Color(0xff6043F5)),
               SizedBox(
                 height: 20,
               ),
               TextWidget(name: "E-mail", color: Colors.grey),
-              TextWidget(name: "test@gmail.com", color: Color(0xff6043F5)),
+              TextWidget(name: email.toString(), color: Color(0xff6043F5)),
               SizedBox(
                 height: 20,
               ),
               TextWidget(name: "Address", color: Colors.grey),
-              TextWidget(name: "Montreal, Quebec Canada", color: Color(0xff6043F5)),
+              TextWidget(name: address.toString(), color: Color(0xff6043F5)),
               SizedBox(
                 height: 20,
               ),
               TextWidget(name: "Phone No.", color: Colors.grey),
-              TextWidget(name: "+15149932765", color: Color(0xff6043F5)),
+              TextWidget(name:phone.toString(), color: Color(0xff6043F5)),
             ],
         ),
       ),
