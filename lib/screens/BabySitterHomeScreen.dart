@@ -4,6 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+int _selectedIndex = 0;
+const TextStyle optionStyle =
+TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+List<Widget> _widgetOptions = <Widget>[
+
+  SitterNotification(email: ""),
+  BabysitterProfile(),
+  // BabysitterProfile(),
+];
+
 class SitterHome extends StatefulWidget {
   const SitterHome({Key? key, required this.email}) : super(key: key);
   final String email;
@@ -13,24 +24,15 @@ class SitterHome extends StatefulWidget {
 }
 
 class _SitterHomeState extends State<SitterHome> {
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    int _selectedIndex = 0;
-     const TextStyle optionStyle =
-    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-
-      List<Widget> _widgetOptions = <Widget>[
-        BabysitterProfile(),
-        SitterNotification(email: ""),
-        // BabysitterProfile(),
-    ];
-
-    void _onItemTapped(int index) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
 
     return Scaffold(
       appBar: AppBar(
