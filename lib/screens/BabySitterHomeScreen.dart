@@ -9,7 +9,6 @@ const TextStyle optionStyle =
 TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
 List<Widget> _widgetOptions = <Widget>[
-
   SitterNotification(email: ""),
   BabysitterProfile(),
   // BabysitterProfile(),
@@ -25,8 +24,6 @@ class SitterHome extends StatefulWidget {
 
 class _SitterHomeState extends State<SitterHome> {
   int _selectedIndex = 0;
-
-
 
   @override
   Widget build(BuildContext context) {

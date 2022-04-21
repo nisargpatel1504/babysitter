@@ -38,11 +38,6 @@ class _SitterNotificationState extends State<SitterNotification> {
     } else {
       setState(() {
         giftItems = result;
-        // for(var i = 0; i< giftItems.length; i++){
-        //
-        //   giftItems.add(giftItems[i]);
-        //
-        // }
       });
     }
   }
@@ -51,42 +46,37 @@ class _SitterNotificationState extends State<SitterNotification> {
   Widget build(BuildContext context) {
 
 
-    return Scaffold(
+    return SingleChildScrollView(
 
-      body: Container(
-        margin:  EdgeInsets.only(top: 10,bottom: 10),
-        child: Column(
+      child: Column(
 
-          children: [
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.all(8),
-                shrinkWrap: true,
-                // physics: NeverScrollableScrollPhysics(),
-                children: [
-                  Container(
-                    // margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: giftItems.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        mainAxisSpacing: 20.0,
-                        crossAxisSpacing: 20.0,
-                      ),
-                      itemBuilder: (context, index) => SitterCart(
-                    giftItem: giftItems[index],
+        children: [
+          ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            children: [
 
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+             Container(
 
+               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+               child:
+               GridView.builder(
+                 shrinkWrap: true,
+                 physics: NeverScrollableScrollPhysics(),
+                 itemCount: giftItems.length,
+                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                   crossAxisCount: 1,
+                   mainAxisSpacing: 10.0,
+                   crossAxisSpacing: 20.0,
+                 ),
+                 itemBuilder: (context, index) => SitterCart(
+                   giftItem: giftItems[index],
+                 ),
+               ),
+             )
+            ],
+          ),
+        ],
       ),
     );
   }
