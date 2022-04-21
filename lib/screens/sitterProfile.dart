@@ -8,6 +8,13 @@ class BabysitterProfile extends StatefulWidget{
 }
 
 class _BabysitterProfileState extends State<BabysitterProfile> {
+
+  final TextEditingController _controller =
+  TextEditingController(text: "Festive");
+  bool _isEnable = false;
+  String _name = "Niki Singh";
+  bool _isEditable = false;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -18,7 +25,6 @@ class _BabysitterProfileState extends State<BabysitterProfile> {
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
-
             child: Container(
               child: Column(
                 children: [
@@ -37,10 +43,10 @@ class _BabysitterProfileState extends State<BabysitterProfile> {
                   Row(
                     children:[
                       Padding(
-                        padding: EdgeInsets.only(left: 20, top: 20),
+                        padding: const EdgeInsets.only(left: 20, top: 20),
                         child: Container(
-                          height: 150,
-                          width: 150,
+                          height: 120,
+                          width: 120,
 
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -58,30 +64,80 @@ class _BabysitterProfileState extends State<BabysitterProfile> {
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         width: 30,
                       ),
 
                       Column(
-                        children: const [
-                          Text("Nikita Johns", style: TextStyle(
-                              color: Color(0xff6043F5),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold
-                          ),),
-                          Text("Montreal, Quebec Canada")
+                        children:  [
+                          Row(
+                            children:  [
+                              Container(
+                                width: 150,
+                                child: !_isEditable
+                                ? Text(_name)
+                                :TextFormField(
+                                  initialValue: _name,
+                                  textInputAction: TextInputAction.done,
+                                   onFieldSubmitted: (value){
+                                    setState(() => {_isEditable = false, _name=value});
+                                   },
+                                   style: const TextStyle(
+                                    color: Color(0xff6043F5),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold
+                                ),
+                                ),
+                              ),
+                              Container(
+
+                                alignment: Alignment.center,
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.edit,
+                                  ),
+                                  iconSize: 20,
+                                  color: Color(0xff6043F5),
+                                  onPressed: () {
+                                    setState((){
+                                      _isEditable = true;
+
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("Montreal, Quebec Canada"),
+                              Container(
+
+                                alignment: Alignment.center,
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.edit,
+                                  ),
+                                  iconSize: 20,
+                                  color: Colors.black,
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ],
+                          )
+
                         ]
                       )
 
                     ]
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
 
                   Column(
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(right:105),
                         child: Text("DESCRIPTION",
                           textAlign:TextAlign.left,
@@ -96,7 +152,7 @@ class _BabysitterProfileState extends State<BabysitterProfile> {
                       Container(
                         width: 300,
                         height: 250,
-                        child:  Card(
+                        child:  const Card(
                             color: Colors.white10,
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
@@ -116,7 +172,7 @@ class _BabysitterProfileState extends State<BabysitterProfile> {
 
                         ),
                         onPressed: () { },
-                        child: Text('Save'),
+                        child: const Text('Save'),
                       )
 
                     ],
