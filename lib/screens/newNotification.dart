@@ -20,10 +20,6 @@ class GiftManager {
       snapshot.docs.forEach((element) {
         Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
         if (data != null && data['sitterId'] == "pant@grr.la" ) {
-          print(element.id);
-          print(data);
-          print("Data name : ${data['name']}  ");
-          // print("Data name : ${data['name']}  ${data} ");
           var booking = GiftItem();
           booking.name = data['name'];
           booking.price = data['totalAmount'];

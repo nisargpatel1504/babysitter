@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class babysitterProfile extends StatefulWidget{
+class BabysitterProfile extends StatefulWidget{
+  const BabysitterProfile({Key? key}) : super(key: key);
+
   @override
-  State<babysitterProfile> createState() => _babysitterProfileState();
+  State<BabysitterProfile> createState() => _BabysitterProfileState();
 }
 
-class _babysitterProfileState extends State<babysitterProfile> {
+class _BabysitterProfileState extends State<BabysitterProfile> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -24,7 +26,6 @@ class _babysitterProfileState extends State<babysitterProfile> {
                     padding: EdgeInsets.only(right: 170),
                     child: Text("Profile",
                       textAlign: TextAlign.left,
-
                       style: TextStyle(
                         color: Color(0xff6043F5),
                         fontSize: 40,
@@ -52,7 +53,6 @@ class _babysitterProfileState extends State<babysitterProfile> {
                               ),
                               borderRadius: BorderRadius.circular(30)
                           ),
-
                           child: null,
 
                         ),

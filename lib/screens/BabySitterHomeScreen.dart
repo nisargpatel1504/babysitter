@@ -1,5 +1,5 @@
 import 'package:babycare/screens/notification.dart';
-import 'package:babycare/screens/sitterProfile.dart';
+import 'package:babycare/screens/sitterProfile.dart' show BabysitterProfile;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,17 +13,17 @@ class SitterHome extends StatefulWidget {
 }
 
 class _SitterHomeState extends State<SitterHome> {
-
-
-
   @override
   Widget build(BuildContext context) {
     int _selectedIndex = 0;
      const TextStyle optionStyle =
     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+
       List<Widget> _widgetOptions = <Widget>[
-      SitterNotification(email: widget.email,),
-      babysitterProfile(),
+        BabysitterProfile(),
+        SitterNotification(email: ""),
+        // BabysitterProfile(),
     ];
 
     void _onItemTapped(int index) {
@@ -61,17 +61,17 @@ class _SitterHomeState extends State<SitterHome> {
             backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
+             icon: Icon(Icons.account_circle_outlined),
             label: 'Profile',
             backgroundColor: Colors.green,
           ),
-
         ],
+
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
-      ),
 
+      ),
     );
   }
 }
